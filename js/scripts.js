@@ -16,6 +16,14 @@ window.addEventListener('load', function () {
         btn.disabled = false
     })
 
+    setInputFilter(inp1, function (value) {
+        return /^-?\d*$/.test(value);
+    });
+
+    setInputFilter(inp2, function (value) {
+        return /^-?\d*$/.test(value);
+    });
+
 
     function solve() {
 
@@ -28,17 +36,33 @@ window.addEventListener('load', function () {
         btn.disabled = true
     }
 
-    function checkInput(event) {
+    function checkInput() {
+
         btn.disabled = false
         this.addEventListener('focus', () => this.value = '')
-        console.log(validate(event.target.value))
+
 
     }
 
-    function validate(event) {
-        let rgx = /^[0-9]+$/;
-        return event.match(rgx)
+
+    // I don't know how this work
+    function setInputFilter(textBox, inputFilter) {
+        ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+            textBox.addEventListener(event, function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        });
     }
+
 
 });
 
