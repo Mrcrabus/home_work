@@ -1,23 +1,28 @@
-html, body{
-	margin: 0;
+html, body {
+    margin: 0;
 }
 
 
-.items{
-	display: flex;
+.items {
+    display: flex;
 
 }
 
-.item{
-	width: 200px;
-	height: 200px;
-	background: #eee;
-	margin: 20px;
-	box-sizing: border-box;
-	border: 1px solid transparent;
+.item {
+    width: 200px;
+    height: 200px;
+    background: #eee;
+    margin: 20px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
 }
 
-.item-active{
-	border: 1px solid red;
-	box-shadow: 10px 10px 10px #222;
+.item-active {
+    border: 1px solid red;
+    box-shadow: 10px 10px 10px #222;
+}
+
+.inp2::-webkit-inner-spin-button,
+.inp1::-webkit-inner-spin-button {
+    display: none;
 }

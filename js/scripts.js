@@ -6,10 +6,16 @@ window.addEventListener('load', function () {
     let res = document.querySelector('.res');
     let opt = document.querySelector('.select')
 
+    btn.disabled = true
 
-    // opt.addEventListener('change', () => console.log(opt.value))
 
+    inp1.addEventListener('keypress', checkInput)
+    inp2.addEventListener('keypress', checkInput)
     btn.addEventListener('click', solve)
+    opt.addEventListener('click', () => {
+        btn.disabled = false
+    })
+
 
     function solve() {
 
@@ -19,9 +25,20 @@ window.addEventListener('load', function () {
             '/': parseInt(inp1.value) / parseInt(inp2.value),
             '*': parseInt(inp1.value) * parseInt(inp2.value)
         }[opt.value]
+        btn.disabled = true
+    }
+
+    function checkInput(event) {
+        btn.disabled = false
+        this.addEventListener('focus', () => this.value = '')
+        console.log(validate(event.target.value))
 
     }
 
+    function validate(event) {
+        let rgx = /^[0-9]+$/;
+        return event.match(rgx)
+    }
 
 });
 
