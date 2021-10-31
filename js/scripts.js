@@ -7,22 +7,27 @@ window.addEventListener('load', function () {
     let opt = document.querySelector('.select')
 
     btn.disabled = true
+    inp1.value = '0'
+    inp2.value = '0'
 
 
-    inp1.addEventListener('keypress', checkInput)
-    inp2.addEventListener('keypress', checkInput)
+    inp1.addEventListener('click', checkInput)
+    inp2.addEventListener('click', checkInput)
     btn.addEventListener('click', solve)
     opt.addEventListener('click', () => {
         btn.disabled = false
     })
 
-    setInputFilter(inp1, function (value) {
-        return /^-?\d*$/.test(value);
-    });
+    function checkInput() {
 
-    setInputFilter(inp2, function (value) {
-        return /^-?\d*$/.test(value);
-    });
+        btn.disabled = false
+        this.value = ''
+        setInputFilter(this, function (value) {
+            return /^-?\d*$/.test(value);
+        });
+
+
+    }
 
 
     function solve() {
@@ -36,16 +41,7 @@ window.addEventListener('load', function () {
         btn.disabled = true
     }
 
-    function checkInput() {
 
-        btn.disabled = false
-        this.addEventListener('focus', () => this.value = '')
-
-
-    }
-
-
-    // I don't know how this work
     function setInputFilter(textBox, inputFilter) {
         ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
             textBox.addEventListener(event, function () {
